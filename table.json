@@ -1,0 +1,37 @@
+{
+    "AttributeDefinitions": [
+        {
+            "AttributeName": "ID",
+            "AttributeType": "S"
+        },
+        {
+            "AttributeName": "SubKey",
+            "AttributeType": "S"
+        }
+    ],
+    "TableName": "or-table",
+    "KeySchema": [
+        {
+            "KeyType": "HASH",
+            "AttributeName": "ID"
+        },
+        {
+            "KeyType": "RANGE",
+            "AttributeName": "SubKey"
+        }
+    ],
+    "Tags": [ 
+        { 
+            "Key": "Owner",
+            "Value": "olivier.richaud"
+        }
+    ],
+    "ProvisionedThroughput": {
+        "WriteCapacityUnits": 5,
+        "ReadCapacityUnits": 5
+    },
+    "StreamSpecification": { 
+       "StreamEnabled": true,
+       "StreamViewType": "NEW_IMAGE"
+    }
+}
