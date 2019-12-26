@@ -25,7 +25,7 @@ make
 ```
 Note: the `Makefile` calls the `docker-machine` utility for MacOS. If you are running on a different environment, please update accordingly. 
 
-# Run and tests
+# Run and test
 You can run the docker image that has been built in the previous section.
 ``` sh
 ./run_docker.sh
