@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.1.2 (Python 3.7.5 on darwin)" generated="20191217 14:52:02.979" rpa="false">
+<suite id="s1" name="Tests" source="/Users/olivier.richaud/dev/aws/dynamodb/tests">
+<suite id="s1-s1" name="Test" source="/Users/olivier.richaud/dev/aws/dynamodb/tests/test.robot">
+<test id="s1-s1-t1" name="Get item">
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>random.randint(100, 300)</arg>
+<arg>modules=random</arg>
+</arguments>
+<assign>
+<var>${id}</var>
+</assign>
+<msg timestamp="20191217 14:52:03.212" level="INFO">${id} = 181</msg>
+<status status="PASS" starttime="20191217 14:52:03.212" endtime="20191217 14:52:03.213"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>random.randint(1, 3)</arg>
+<arg>modules=random</arg>
+</arguments>
+<assign>
+<var>${sub_key_id}</var>
+</assign>
+<msg timestamp="20191217 14:52:03.213" level="INFO">${sub_key_id} = 1</msg>
+<status status="PASS" starttime="20191217 14:52:03.213" endtime="20191217 14:52:03.213"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${base_url}/item/${id}/S-${sub_key_id}</arg>
+</arguments>
+<assign>
+<var>${url}</var>
+</assign>
+<msg timestamp="20191217 14:52:03.214" level="INFO">${url} = http://localhost:8080/item/181/S-1</msg>
+<status status="PASS" starttime="20191217 14:52:03.213" endtime="20191217 14:52:03.214"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>URL: ${url}</arg>
+</arguments>
+<status status="PASS" starttime="20191217 14:52:03.214" endtime="20191217 14:52:03.214"></status>
+</kw>
+<kw name="Get" library="REST">
+<tags>
+<tag>http</tag>
+</tags>
+<doc>*Sends a GET request to the endpoint.*</doc>
+<arguments>
+<arg>${url}</arg>
+</arguments>
+<status status="PASS" starttime="20191217 14:52:03.214" endtime="20191217 14:52:03.355"></status>
+</kw>
+<kw name="Integer" library="REST">
+<tags>
+<tag>assertions</tag>
+</tags>
+<doc>*Asserts the field as JSON integer.*</doc>
+<arguments>
+<arg>response status</arg>
+<arg>200</arg>
+</arguments>
+<status status="PASS" starttime="20191217 14:52:03.356" endtime="20191217 14:52:03.356"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>response body</arg>
+</arguments>
+<msg timestamp="20191217 14:52:03.357" level="INFO">response body</msg>
+<status status="PASS" starttime="20191217 14:52:03.356" endtime="20191217 14:52:03.357"></status>
+</kw>
+<status status="PASS" starttime="20191217 14:52:03.212" endtime="20191217 14:52:03.357" critical="yes"></status>
+</test>
+<test id="s1-s1-t2" name="Get item NOT existing">
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>100000</arg>
+</arguments>
+<assign>
+<var>${id}</var>
+</assign>
+<msg timestamp="20191217 14:52:03.357" level="INFO">${id} = 100000</msg>
+<status status="PASS" starttime="20191217 14:52:03.357" endtime="20191217 14:52:03.357"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>100</arg>
+</arguments>
+<assign>
+<var>${sub_key_id}</var>
+</assign>
+<msg timestamp="20191217 14:52:03.358" level="INFO">${sub_key_id} = 100</msg>
+<status status="PASS" starttime="20191217 14:52:03.357" endtime="20191217 14:52:03.358"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${base_url}/item/${id}/S-${sub_key_id}</arg>
+</arguments>
+<assign>
+<var>${url}</var>
+</assign>
+<msg timestamp="20191217 14:52:03.358" level="INFO">${url} = http://localhost:8080/item/100000/S-100</msg>
+<status status="PASS" starttime="20191217 14:52:03.358" endtime="20191217 14:52:03.358"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>URL: ${url}</arg>
+</arguments>
+<status status="PASS" starttime="20191217 14:52:03.358" endtime="20191217 14:52:03.358"></status>
+</kw>
+<kw name="Get" library="REST">
+<tags>
+<tag>http</tag>
+</tags>
+<doc>*Sends a GET request to the endpoint.*</doc>
+<arguments>
+<arg>${url}</arg>
+</arguments>
+<status status="PASS" starttime="20191217 14:52:03.358" endtime="20191217 14:52:03.463"></status>
+</kw>
+<kw name="Integer" library="REST">
+<tags>
+<tag>assertions</tag>
+</tags>
+<doc>*Asserts the field as JSON integer.*</doc>
+<arguments>
+<arg>response status</arg>
+<arg>404</arg>
+</arguments>
+<status status="PASS" starttime="20191217 14:52:03.464" endtime="20191217 14:52:03.464"></status>
+</kw>
+<status status="PASS" starttime="20191217 14:52:03.357" endtime="20191217 14:52:03.465" critical="yes"></status>
+</test>
+<test id="s1-s1-t3" name="Get Items for ID">
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>random.randint(100, 300)</arg>
+<arg>modules=random</arg>
+</arguments>
+<assign>
+<var>${id}</var>
+</assign>
+<msg timestamp="20191217 14:52:03.466" level="INFO">${id} = 213</msg>
+<status status="PASS" starttime="20191217 14:52:03.465" endtime="20191217 14:52:03.466"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${base_url}/items/${id}</arg>
+</arguments>
+<assign>
+<var>${url}</var>
+</assign>
+<msg timestamp="20191217 14:52:03.466" level="INFO">${url} = http://localhost:8080/items/213</msg>
+<status status="PASS" starttime="20191217 14:52:03.466" endtime="20191217 14:52:03.466"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>URL: ${url}</arg>
+</arguments>
+<status status="PASS" starttime="20191217 14:52:03.466" endtime="20191217 14:52:03.467"></status>
+</kw>
+<kw name="Get" library="REST">
+<tags>
+<tag>http</tag>
+</tags>
+<doc>*Sends a GET request to the endpoint.*</doc>
+<arguments>
+<arg>${url}</arg>
+</arguments>
+<status status="PASS" starttime="20191217 14:52:03.467" endtime="20191217 14:52:03.572"></status>
+</kw>
+<kw name="Integer" library="REST">
+<tags>
+<tag>assertions</tag>
+</tags>
+<doc>*Asserts the field as JSON integer.*</doc>
+<arguments>
+<arg>response status</arg>
+<arg>200</arg>
+</arguments>
+<status status="PASS" starttime="20191217 14:52:03.572" endtime="20191217 14:52:03.572"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>response body</arg>
+</arguments>
+<msg timestamp="20191217 14:52:03.573" level="INFO">response body</msg>
+<status status="PASS" starttime="20191217 14:52:03.573" endtime="20191217 14:52:03.573"></status>
+</kw>
+<kw name="Integer" library="REST">
+<tags>
+<tag>assertions</tag>
+</tags>
+<doc>*Asserts the field as JSON integer.*</doc>
+<arguments>
+<arg>$.Count</arg>
+<arg>3</arg>
+</arguments>
+<status status="PASS" starttime="20191217 14:52:03.573" endtime="20191217 14:52:03.600"></status>
+</kw>
+<status status="PASS" starttime="20191217 14:52:03.465" endtime="20191217 14:52:03.600" critical="yes"></status>
+</test>
+<test id="s1-s1-t4" name="Get Items">
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${base_url}/items</arg>
+</arguments>
+<assign>
+<var>${url}</var>
+</assign>
+<msg timestamp="20191217 14:52:03.601" level="INFO">${url} = http://localhost:8080/items</msg>
+<status status="PASS" starttime="20191217 14:52:03.601" endtime="20191217 14:52:03.601"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>URL: ${url}</arg>
+</arguments>
+<status status="PASS" starttime="20191217 14:52:03.601" endtime="20191217 14:52:03.601"></status>
+</kw>
+<kw name="Get" library="REST">
+<tags>
+<tag>http</tag>
+</tags>
+<doc>*Sends a GET request to the endpoint.*</doc>
+<arguments>
+<arg>${url}</arg>
+</arguments>
+<status status="PASS" starttime="20191217 14:52:03.601" endtime="20191217 14:52:03.722"></status>
+</kw>
+<kw name="Integer" library="REST">
+<tags>
+<tag>assertions</tag>
+</tags>
+<doc>*Asserts the field as JSON integer.*</doc>
+<arguments>
+<arg>response status</arg>
+<arg>200</arg>
+</arguments>
+<status status="PASS" starttime="20191217 14:52:03.722" endtime="20191217 14:52:03.723"></status>
+</kw>
+<status status="PASS" starttime="20191217 14:52:03.600" endtime="20191217 14:52:03.723" critical="yes"></status>
+</test>
+<test id="s1-s1-t5" name="Get Items with max">
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>random.randint(1, 5)</arg>
+<arg>modules=random</arg>
+</arguments>
+<assign>
+<var>${max}</var>
+</assign>
+<msg timestamp="20191217 14:52:03.724" level="INFO">${max} = 4</msg>
+<status status="PASS" starttime="20191217 14:52:03.723" endtime="20191217 14:52:03.724"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${base_url}/items?max=${max}</arg>
+</arguments>
+<assign>
+<var>${url}</var>
+</assign>
+<msg timestamp="20191217 14:52:03.725" level="INFO">${url} = http://localhost:8080/items?max=4</msg>
+<status status="PASS" starttime="20191217 14:52:03.724" endtime="20191217 14:52:03.725"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>URL: ${url}</arg>
+</arguments>
+<status status="PASS" starttime="20191217 14:52:03.725" endtime="20191217 14:52:03.725"></status>
+</kw>
+<kw name="Get" library="REST">
+<tags>
+<tag>http</tag>
+</tags>
+<doc>*Sends a GET request to the endpoint.*</doc>
+<arguments>
+<arg>${url}</arg>
+</arguments>
+<status status="PASS" starttime="20191217 14:52:03.726" endtime="20191217 14:52:03.834"></status>
+</kw>
+<kw name="Integer" library="REST">
+<tags>
+<tag>assertions</tag>
+</tags>
+<doc>*Asserts the field as JSON integer.*</doc>
+<arguments>
+<arg>response status</arg>
+<arg>200</arg>
+</arguments>
+<status status="PASS" starttime="20191217 14:52:03.834" endtime="20191217 14:52:03.835"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>response body</arg>
+</arguments>
+<msg timestamp="20191217 14:52:03.835" level="INFO">response body</msg>
+<status status="PASS" starttime="20191217 14:52:03.835" endtime="20191217 14:52:03.835"></status>
+</kw>
+<kw name="Integer" library="REST">
+<tags>
+<tag>assertions</tag>
+</tags>
+<doc>*Asserts the field as JSON integer.*</doc>
+<arguments>
+<arg>$.Count</arg>
+<arg>${max}</arg>
+</arguments>
+<status status="PASS" starttime="20191217 14:52:03.835" endtime="20191217 14:52:03.861"></status>
+</kw>
+<status status="PASS" starttime="20191217 14:52:03.723" endtime="20191217 14:52:03.861" critical="yes"></status>
+</test>
+<test id="s1-s1-t6" name="Get Items with max (negative max) - error case">
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>-10</arg>
+</arguments>
+<assign>
+<var>${max}</var>
+</assign>
+<msg timestamp="20191217 14:52:03.862" level="INFO">${max} = -10</msg>
+<status status="PASS" starttime="20191217 14:52:03.861" endtime="20191217 14:52:03.862"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${base_url}/items?max=${max}</arg>
+</arguments>
+<assign>
+<var>${url}</var>
+</assign>
+<msg timestamp="20191217 14:52:03.862" level="INFO">${url} = http://localhost:8080/items?max=-10</msg>
+<status status="PASS" starttime="20191217 14:52:03.862" endtime="20191217 14:52:03.862"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>URL: ${url}</arg>
+</arguments>
+<status status="PASS" starttime="20191217 14:52:03.862" endtime="20191217 14:52:03.862"></status>
+</kw>
+<kw name="Get" library="REST">
+<tags>
+<tag>http</tag>
+</tags>
+<doc>*Sends a GET request to the endpoint.*</doc>
+<arguments>
+<arg>${url}</arg>
+</arguments>
+<status status="PASS" starttime="20191217 14:52:03.862" endtime="20191217 14:52:03.867"></status>
+</kw>
+<kw name="Integer" library="REST">
+<tags>
+<tag>assertions</tag>
+</tags>
+<doc>*Asserts the field as JSON integer.*</doc>
+<arguments>
+<arg>response status</arg>
+<arg>400</arg>
+</arguments>
+<status status="PASS" starttime="20191217 14:52:03.867" endtime="20191217 14:52:03.868"></status>
+</kw>
+<status status="PASS" starttime="20191217 14:52:03.861" endtime="20191217 14:52:03.868" critical="yes"></status>
+</test>
+<test id="s1-s1-t7" name="Get Items with max (alpha max) - error case">
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>abcd</arg>
+</arguments>
+<assign>
+<var>${max}</var>
+</assign>
+<msg timestamp="20191217 14:52:03.868" level="INFO">${max} = abcd</msg>
+<status status="PASS" starttime="20191217 14:52:03.868" endtime="20191217 14:52:03.868"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${base_url}/items?max=${max}</arg>
+</arguments>
+<assign>
+<var>${url}</var>
+</assign>
+<msg timestamp="20191217 14:52:03.869" level="INFO">${url} = http://localhost:8080/items?max=abcd</msg>
+<status status="PASS" starttime="20191217 14:52:03.869" endtime="20191217 14:52:03.869"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>URL: ${url}</arg>
+</arguments>
+<status status="PASS" starttime="20191217 14:52:03.869" endtime="20191217 14:52:03.869"></status>
+</kw>
+<kw name="Get" library="REST">
+<tags>
+<tag>http</tag>
+</tags>
+<doc>*Sends a GET request to the endpoint.*</doc>
+<arguments>
+<arg>${url}</arg>
+</arguments>
+<status status="PASS" starttime="20191217 14:52:03.869" endtime="20191217 14:52:03.873"></status>
+</kw>
+<kw name="Integer" library="REST">
+<tags>
+<tag>assertions</tag>
+</tags>
+<doc>*Asserts the field as JSON integer.*</doc>
+<arguments>
+<arg>response status</arg>
+<arg>400</arg>
+</arguments>
+<status status="PASS" starttime="20191217 14:52:03.874" endtime="20191217 14:52:03.875"></status>
+</kw>
+<status status="PASS" starttime="20191217 14:52:03.868" endtime="20191217 14:52:03.875" critical="yes"></status>
+</test>
+<test id="s1-s1-t8" name="Get Items with max (exceeding MAX) - error case">
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>10000</arg>
+</arguments>
+<assign>
+<var>${max}</var>
+</assign>
+<msg timestamp="20191217 14:52:03.876" level="INFO">${max} = 10000</msg>
+<status status="PASS" starttime="20191217 14:52:03.875" endtime="20191217 14:52:03.876"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${base_url}/items?max=${max}</arg>
+</arguments>
+<assign>
+<var>${url}</var>
+</assign>
+<msg timestamp="20191217 14:52:03.876" level="INFO">${url} = http://localhost:8080/items?max=10000</msg>
+<status status="PASS" starttime="20191217 14:52:03.876" endtime="20191217 14:52:03.876"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>URL: ${url}</arg>
+</arguments>
+<status status="PASS" starttime="20191217 14:52:03.876" endtime="20191217 14:52:03.876"></status>
+</kw>
+<kw name="Get" library="REST">
+<tags>
+<tag>http</tag>
+</tags>
+<doc>*Sends a GET request to the endpoint.*</doc>
+<arguments>
+<arg>${url}</arg>
+</arguments>
+<status status="PASS" starttime="20191217 14:52:03.876" endtime="20191217 14:52:03.881"></status>
+</kw>
+<kw name="Integer" library="REST">
+<tags>
+<tag>assertions</tag>
+</tags>
+<doc>*Asserts the field as JSON integer.*</doc>
+<arguments>
+<arg>response status</arg>
+<arg>400</arg>
+</arguments>
+<status status="PASS" starttime="20191217 14:52:03.881" endtime="20191217 14:52:03.882"></status>
+</kw>
+<status status="PASS" starttime="20191217 14:52:03.875" endtime="20191217 14:52:03.882" critical="yes"></status>
+</test>
+<test id="s1-s1-t9" name="Not handled uri - error case">
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${base_url}/wrong</arg>
+</arguments>
+<assign>
+<var>${url}</var>
+</assign>
+<msg timestamp="20191217 14:52:03.883" level="INFO">${url} = http://localhost:8080/wrong</msg>
+<status status="PASS" starttime="20191217 14:52:03.883" endtime="20191217 14:52:03.883"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>URL: ${url}</arg>
+</arguments>
+<status status="PASS" starttime="20191217 14:52:03.883" endtime="20191217 14:52:03.883"></status>
+</kw>
+<kw name="Get" library="REST">
+<tags>
+<tag>http</tag>
+</tags>
+<doc>*Sends a GET request to the endpoint.*</doc>
+<arguments>
+<arg>${url}</arg>
+</arguments>
+<msg timestamp="20191217 14:52:03.887" level="WARN">Response body content is not JSON. Content-Type is: text/plain; charset=utf-8</msg>
+<status status="PASS" starttime="20191217 14:52:03.883" endtime="20191217 14:52:03.887"></status>
+</kw>
+<kw name="Integer" library="REST">
+<tags>
+<tag>assertions</tag>
+</tags>
+<doc>*Asserts the field as JSON integer.*</doc>
+<arguments>
+<arg>response status</arg>
+<arg>404</arg>
+</arguments>
+<status status="PASS" starttime="20191217 14:52:03.887" endtime="20191217 14:52:03.888"></status>
+</kw>
+<status status="PASS" starttime="20191217 14:52:03.882" endtime="20191217 14:52:03.888" critical="yes"></status>
+</test>
+<status status="PASS" starttime="20191217 14:52:02.998" endtime="20191217 14:52:03.888"></status>
+</suite>
+<status status="PASS" starttime="20191217 14:52:02.980" endtime="20191217 14:52:03.889"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="9" fail="0">Critical Tests</stat>
+<stat pass="9" fail="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="9" fail="0" id="s1" name="Tests">Tests</stat>
+<stat pass="9" fail="0" id="s1-s1" name="Test">Tests.Test</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20191217 14:52:03.887" level="WARN">Response body content is not JSON. Content-Type is: text/plain; charset=utf-8</msg>
+</errors>
+</robot>
