@@ -75,3 +75,9 @@ Not handled uri - error case
     Log To Console      URL: ${url}
     GET                 ${url}
     Integer             response status     404
+
+health check
+    ${url}              Set Variable        ${base_url}/healthz
+    Log To Console      URL: ${url}
+    GET                 ${url}
+    Integer             response status     200

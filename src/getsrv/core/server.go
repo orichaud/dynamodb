@@ -45,6 +45,7 @@ func NewServer(context *Context) *Server {
 		Methods("GET").
 		Schemes("http")
 
+	// Heath check
 	healthzHandler := func(w http.ResponseWriter, r *http.Request) {
 		HandleHealthz(context, w, r)
 	}
@@ -52,14 +53,30 @@ func NewServer(context *Context) *Server {
 		Methods("GET").
 		Schemes("http")
 
-	srv := &http.Server{
+	// Error 404
+	r.NotFoundHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusNotFound)
+
+		msg := struct {
+			Message string `json:Message`
+		}{
+			Message: "no resource found: 404",
+		}
+
+		if err := Send(msg, w); err != nil {
+			glog.Errorf("Cannot transfer JSON payload: %s", err)
+			w.WriteHeader(http.StatusInternalServerError)
+		}
+	})
+
+	httpSrv := &http.Server{
 		Handler:      r,
 		Addr:         HOST,
 		WriteTimeout: 3 * time.Second,
 		ReadTimeout:  3 * time.Second,
 	}
 
-	return &Server{HttpServer: srv}
+	return &Server{HttpServer: httpSrv}
 }
 
 func (server *Server) Start() {

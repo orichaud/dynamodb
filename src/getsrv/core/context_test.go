@@ -9,11 +9,12 @@ func TestOnSuccess(t *testing.T) {
 		Stats:        Stats{InvocationCount: 0, SuccessCount: 0, FailedCount: 0},
 		DynamoClient: nil}
 	context.OnSuccess()
-	if count := context.GetSuccessCount(); count != 1 {
-		t.Errorf("Invalid success count: %v", count)
+	stats := context.GetStats()
+	if stats.SuccessCount != 1 {
+		t.Errorf("Invalid success count: %v", stats.SuccessCount)
 	}
-	if count := context.GetInvocationCount(); count != 1 {
-		t.Errorf("Invalid invocation count: %v", count)
+	if stats.InvocationCount != 1 {
+		t.Errorf("Invalid invocation count: %v", stats.InvocationCount)
 	}
 }
 
@@ -22,10 +23,11 @@ func TestOnFailure(t *testing.T) {
 		Stats:        Stats{InvocationCount: 0, SuccessCount: 0, FailedCount: 0},
 		DynamoClient: nil}
 	context.OnFailure()
-	if count := context.GetFailedCount(); count != 1 {
-		t.Errorf("Invalid failed count: %v", count)
+	stats := context.GetStats()
+	if stats.FailedCount != 1 {
+		t.Errorf("Invalid failed count: %v", stats.FailedCount)
 	}
-	if count := context.GetInvocationCount(); count != 1 {
-		t.Errorf("Invalid invocation count: %v", count)
+	if stats.InvocationCount != 1 {
+		t.Errorf("Invalid invocation count: %v", stats.InvocationCount)
 	}
 }
