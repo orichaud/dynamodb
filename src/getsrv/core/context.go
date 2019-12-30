@@ -36,16 +36,11 @@ func NewContext() *Context {
 	return context
 }
 
-func (context *Context) GetInvocationCount() uint32 {
-	return atomic.LoadUint32(&context.InvocationCount)
-}
-
-func (context *Context) GetSuccessCount() uint32 {
-	return atomic.LoadUint32(&context.SuccessCount)
-}
-
-func (context *Context) GetFailedCount() uint32 {
-	return atomic.LoadUint32(&context.FailedCount)
+func (context *Context) GetStats() *Stats {
+	stats := &Stats{SuccessCount: atomic.LoadUint32(&context.SuccessCount),
+		FailedCount:     atomic.LoadUint32(&context.FailedCount),
+		InvocationCount: atomic.LoadUint32(&context.InvocationCount)}
+	return stats
 }
 
 func (context *Context) OnSuccess() {
