@@ -6,12 +6,6 @@ import (
 	"github.com/golang/glog"
 )
 
-type Heath struct {
-	InvocationCount uint32 `json:InvocationCount`
-	SuccessCount    uint32 `json:SuccessCount`
-	FailedCount     uint32 `json:FailedCount`
-}
-
 func HandleHealthz(context *Context, w http.ResponseWriter, r *http.Request) {
 	stats := context.GetStats()
 	if err := Send(stats, w); err != nil {
