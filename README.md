@@ -17,13 +17,21 @@ Drop table and data:
 
 # Build the sample application
 We assume:
-* `go` is install on your computer.
-* `docker` is installed and we can push to it.
+* `go` is installed on your computer. With MacOS, the best is to use [Brew](https://brew.sh/) and then run `brew install go`.
+* `VirtualBox` is installed on your computer. With MacOS, the best is to use [Brew](https://brew.sh/) and then run ` brew cask install virtualbox`.
+* `docker` is installed and we can push to it. With MacOS, the best is to use [Brew](https://brew.sh/) and then run `brew install docker`. Once docker is installed, create a docker VM with `docker-machine create <name of your VM>`. 
+* `python3` is installed.  With MacOS, the best is to use [Brew](https://brew.sh/) and then run `brew install docker`. Once docker is installed, create a docker VM with `brew install python3`
+* `RobotFramework` is installed with `pip`: `pip3 install robotframework`.
+
+Before compiling: 
+* change the variable `DOCKER_VM` in the `Makefile` and set it with the name of your docker machine VM.
+* run your docker VM with `docker-machine start <name of your docker VM>
+
 To build the sample service:
 ``` sh
 make
 ```
-Note: the `Makefile` calls the `docker-machine` utility for MacOS. If you are running on a different environment, please update accordingly. 
+Note: the `Makefile` calls the `docker-machine` utility for MacOS. If you are running on a different environment, please update accordingly.
 
 # Run and test
 You can run the docker image that has been built in the previous section.
