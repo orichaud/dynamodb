@@ -25,7 +25,7 @@ We assume:
 
 Before compiling: 
 * change the variable `DOCKER_VM` in the `Makefile` and set it with the name of your docker machine VM.
-* run your docker VM with `docker-machine start <name of your docker VM>
+* run your docker VM with `docker-machine start <name of your docker VM>`
 
 To build the sample service:
 ``` sh
