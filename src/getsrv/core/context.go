@@ -36,6 +36,14 @@ func NewContext() *Context {
 	return context
 }
 
+func NewDummyContext() *Context {
+	// Create DynamoDB client
+	context := &Context{
+		Stats:        Stats{InvocationCount: 0, SuccessCount: 0, FailedCount: 0},
+	}
+	return context
+}
+
 func (context *Context) GetStats() *Stats {
 	stats := &Stats{SuccessCount: atomic.LoadUint32(&context.SuccessCount),
 		FailedCount:     atomic.LoadUint32(&context.FailedCount),
