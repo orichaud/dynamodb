@@ -3,6 +3,7 @@ package core
 import (
 	"net/http"
 	"time"
+	"context"
 
 	"github.com/golang/glog"
 	"github.com/gorilla/mux"
@@ -16,7 +17,7 @@ type Server struct {
 	HttpServer *http.Server
 }
 
-func NewServer(context *Context) *Server {
+func BuildRouter(context *Context) *mux.Router {
 	r := mux.NewRouter()
 
 	// /item...
@@ -68,9 +69,14 @@ func NewServer(context *Context) *Server {
 			w.WriteHeader(http.StatusInternalServerError)
 		}
 	})
+	return r
+}
+
+func NewServer(context *Context) *Server {
+	router := BuildRouter(context)
 
 	httpSrv := &http.Server{
-		Handler:      r,
+		Handler:      router,
 		Addr:         HOST,
 		WriteTimeout: 3 * time.Second,
 		ReadTimeout:  3 * time.Second,
@@ -83,5 +89,12 @@ func (server *Server) Start() {
 	glog.Info("server is ready to handle request")
 	if err := server.HttpServer.ListenAndServe(); err != nil {
 		glog.Error("failed to start the HTTP web server", err)
+	}
+}
+
+func (server *Server) Stop() {
+	glog.Info("server is stopping")
+	if err := server.HttpServer.Shutdown(context.Background()); err != nil {
+		glog.Error("failed to stop the HTTP web server", err)
 	}
 }
