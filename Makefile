@@ -4,6 +4,7 @@ GOCLEAN=$(GOCMD) clean
 GOTEST=$(GOCMD) test
 
 DOCKER=docker
+DOCKER_VM=or
 
 PACKAGES=getsrv/core getsrv/server
 SERVER=getsrv
@@ -24,10 +25,10 @@ test:
 	GOPATH=$(GOPATH) $(GOTEST) -v -timeout 30s $(PACKAGES)	
 
 docker:
-	eval $$(docker-machine env or) && $(DOCKER) build -t $(IMAGE) .
-	eval $$(docker-machine env or) && $(DOCKER) images
+	eval $$(docker-machine env $(DOCKER_VM)) && $(DOCKER) build -t $(IMAGE) .
+	eval $$(docker-machine env $(DOCKER_VM)) && $(DOCKER) images
 
 clean:
 	- rm -rf $(BINDIR)
-	- eval $$(docker-machine env or) && $(DOCKER) rmi -f $(IMAGE)
+	- eval $$(docker-machine env $(DOCKER_VM)) && $(DOCKER) rmi -f $(IMAGE)
 	- $(GOCLEAN) $(PACKAGE)
